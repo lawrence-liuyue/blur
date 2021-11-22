@@ -1,0 +1,27 @@
+{
+  "__version__": "1.0.1",
+  "general": {
+    "designResolution": {
+      "width": 1200,
+      "height": 2640
+    }
+  },
+  "layer": [
+    {
+      "name": "SRC_SCREEN",
+      "value": 1
+    },
+    {
+      "name": "DOWNSAMPLED",
+      "value": 2
+    },
+    {
+      "name": "XBLUR",
+      "value": 4
+    },
+    {
+      "name": "YBLUR",
+      "value": 8
+    }
+  ]
+}
