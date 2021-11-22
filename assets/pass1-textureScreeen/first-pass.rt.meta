@@ -1,0 +1,30 @@
+{
+  "ver": "1.1.1",
+  "importer": "render-texture",
+  "imported": true,
+  "uuid": "c87785a0-0bed-4ae3-b7e3-9e21d0bfdec9",
+  "files": [
+    ".json"
+  ],
+  "subMetas": {
+    "f9941": {
+      "importer": "rt-sprite-frame",
+      "uuid": "c87785a0-0bed-4ae3-b7e3-9e21d0bfdec9@f9941",
+      "displayName": "first-pass",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "imageUuidOrDatabaseUri": "c87785a0-0bed-4ae3-b7e3-9e21d0bfdec9"
+      },
+      "ver": "1.0.0",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "redirect": "c87785a0-0bed-4ae3-b7e3-9e21d0bfdec9@f9941"
+  }
+}
