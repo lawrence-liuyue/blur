@@ -8,10 +8,6 @@
   },
   "layer": [
     {
-      "name": "SRC_SCREEN",
-      "value": 1
-    },
-    {
       "name": "DOWNSAMPLED",
       "value": 2
     },
