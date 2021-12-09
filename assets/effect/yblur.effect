@@ -131,45 +131,30 @@ CCProgram unlit-fs %{
   vec4 frag () {
     vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
 
-	float w = 600.0;
-	float h = 1320.0;
+	float blurWeightsAndOffset[20];
+	blurWeightsAndOffset[0] = 0.093899;
+	blurWeightsAndOffset[1] = 0.116472;
+	blurWeightsAndOffset[2] = 0.0979274;
+	blurWeightsAndOffset[3] = 0.0745668;
+	blurWeightsAndOffset[4] = 0.0514216;
+	blurWeightsAndOffset[5] = 0.0321146;
+	blurWeightsAndOffset[6] = 0.0181642;
+	blurWeightsAndOffset[7] = 0.00930433;
+	blurWeightsAndOffset[8] = 0.00431624;
+	blurWeightsAndOffset[9] = 0.00181333;
+	blurWeightsAndOffset[10] = 0.663891;
+	blurWeightsAndOffset[11] = 2.48442;	
+	blurWeightsAndOffset[12] = 4.47198;
+	blurWeightsAndOffset[13] = 6.45958;
+	blurWeightsAndOffset[14] = 8.44722;
+	blurWeightsAndOffset[15] = 10.4349;
+	blurWeightsAndOffset[16] = 12.4227;
+	blurWeightsAndOffset[17] = 14.4106;
+	blurWeightsAndOffset[18] = 16.3986;
+	blurWeightsAndOffset[19] = 18.3867;
 	
-	float blurWeightsAndOffset[30];
-	blurWeightsAndOffset[0] = 0.0618246;
-	blurWeightsAndOffset[1] = 0.0799065;
-	blurWeightsAndOffset[2] = 0.0741542;
-	blurWeightsAndOffset[3] = 0.06594;
-	blurWeightsAndOffset[4] = 0.0561851;
-	blurWeightsAndOffset[5] = 0.0458725;
-	blurWeightsAndOffset[6] = 0.0358874;
-	blurWeightsAndOffset[7] = 0.0269024;
-	blurWeightsAndOffset[8] = 0.0193241;
-	blurWeightsAndOffset[9] = 0.0133005;
-	blurWeightsAndOffset[10] = 0.00877189;
-	blurWeightsAndOffset[11] = 0.00554342;	
-	blurWeightsAndOffset[12] = 0.00335676;
-	blurWeightsAndOffset[13] = 0.0019477;
-	blurWeightsAndOffset[14] = 0.00108288;
-	
-	blurWeightsAndOffset[15] = 0.665477;
-	blurWeightsAndOffset[16] = 2.49331;
-	blurWeightsAndOffset[17] = 4.48796;
-	blurWeightsAndOffset[18] = 6.48262;
-	blurWeightsAndOffset[19] = 8.47727;
-	blurWeightsAndOffset[20] = 10.4719;
-	blurWeightsAndOffset[21] = 12.4666;
-	blurWeightsAndOffset[22] = 14.4613;
-	blurWeightsAndOffset[23] = 16.567;
-	blurWeightsAndOffset[24] = 18.4507;
-	blurWeightsAndOffset[25] = 20.4454;
-	blurWeightsAndOffset[26] = 22.4401;
-	blurWeightsAndOffset[27] = 24.4348;
-	blurWeightsAndOffset[28] = 26.4296;
-	blurWeightsAndOffset[29] = 28.4243;
-	
-  
-    float blurStep = 0.000758;
-	#define blurSize 15
+    float blurStep = 0.00303;
+	#define blurSize 10
 
     float offset;
     vec2 lTexCoords, rTexCoords;
