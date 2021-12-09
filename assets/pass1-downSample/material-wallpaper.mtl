@@ -16,7 +16,10 @@
   "_states": [
     {
       "rasterizerState": {},
-      "depthStencilState": {},
+      "depthStencilState": {
+        "depthTest": false,
+        "depthWrite": false
+      },
       "blendState": {
         "targets": [
           {}
@@ -27,7 +30,7 @@
   "_props": [
     {
       "mainTexture": {
-        "__uuid__": "f7e83bea-6b71-4566-8778-2d2094eb7117@6c48a",
+        "__uuid__": "b456243c-2ed4-4101-aa17-e82ec6821aa7@6c48a",
         "__expectedType__": "cc.Texture2D"
       }
     }
