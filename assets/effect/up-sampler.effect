@@ -17,6 +17,22 @@ CCEffect %{
         cullMode: none
       properties:
         alphaThreshold: { value: 0.5 }
+    - &colorAdjust
+      vert: adjust-vs:vert
+      frag: adjust-fs:frag
+      depthStencilState:
+        depthTest: false
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      rasterizerState:
+        cullMode: none
+      properties:
+        alphaThreshold: { value: 0.5 }		
 }%
 
 CCProgram sprite-vs %{
@@ -86,9 +102,44 @@ CCProgram sprite-fs %{
       o = CCSampleWithAlphaSeparated(cc_spriteTexture, uv0);
     #endif
 	
-	o.rgb = o.rgb / (o.rgb + 0.0019);
+	o.rgb = o.rgb / (o.a + 0.0019);
 	o.rgb = clamp(vec3(outputMatrix * vec4(o.rgb, 1.0)), 0.0, 1.0);
-	o.rgb = o.rgb / (o.rgb + 0.0019);
+	o.rgb = o.rgb / (o.a + 0.0019);
+    
+    return o;
+  }
+}%
+
+CCProgram adjust-vs %{
+  precision highp float;
+  #include <cc-global>
+  #if USE_LOCAL
+    #include <cc-local>
+  #endif
+  #if SAMPLE_FROM_RT
+    #include <common>
+  #endif
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+
+  vec4 vert () {
+    vec4 pos = vec4(a_position, 1);
+	pos = cc_matViewProj * pos;
+    return pos;
+  }
+}%
+
+CCProgram adjust-fs %{
+  precision highp float;
+  #include <embedded-alpha>
+  #include <alpha-test>
+
+  vec4 frag () {
+	vec4 incolor = vec4(0.399902, 0.399902, 0.399902, 0.0486755);
+    vec4 o = incolor;
+	o.a = 1.0;
+	o *= incolor.a;
     
     return o;
   }
