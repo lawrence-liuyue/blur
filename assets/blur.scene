@@ -115,7 +115,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Canvas",
+    "_name": "pass4-upSampler",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -144,7 +144,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 600,
-      "y": 1319.9999999999998,
+      "y": 1320,
       "z": 0
     },
     "_lrot": {
@@ -409,10 +409,10 @@
     "__prefab": null,
     "_alignFlags": 45,
     "_target": null,
-    "_left": 480,
-    "_right": 480,
-    "_top": -3.979039320256561e-13,
-    "_bottom": -3.979039320256561e-13,
+    "_left": -480,
+    "_right": -480,
+    "_top": -1.7053025658242404e-13,
+    "_bottom": -1.7053025658242404e-13,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -739,7 +739,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Pass3",
+    "_name": "Pass3-xblur",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -982,7 +982,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Pass4",
+    "_name": "Pass4-yblur",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
