@@ -23,7 +23,11 @@
       },
       "blendState": {
         "targets": [
-          {}
+          {
+            "blend": true,
+            "blendDst": 4,
+            "blendDstAlpha": 4
+          }
         ]
       }
     }

@@ -17,22 +17,6 @@ CCEffect %{
         cullMode: none
       properties:
         alphaThreshold: { value: 0.5 }
-    - &colorAdjust
-      vert: adjust-vs:vert
-      frag: adjust-fs:frag
-      depthStencilState:
-        depthTest: false
-        depthWrite: false
-      blendState:
-        targets:
-        - blend: true
-          blendSrc: src_alpha
-          blendDst: one_minus_src_alpha
-          blendDstAlpha: one_minus_src_alpha
-      rasterizerState:
-        cullMode: none
-      properties:
-        alphaThreshold: { value: 0.5 }		
 }%
 
 CCProgram sprite-vs %{
@@ -90,57 +74,18 @@ CCProgram sprite-fs %{
   #endif
 
   vec4 frag () {
-	mat4 outputMatrix;
-	outputMatrix[0] = vec4(1.06427, -0.017395, -0.017395, 0);
-	outputMatrix[1] = vec4(-0.0583917, 1.02328, -0.0583917, 0);
-	outputMatrix[2] = vec4(-0.00588, -0.00588, 1.07579, 0);
-	outputMatrix[3] = vec4(0, 0, 0, 1);
-	
     vec4 o = vec4(1, 1, 1, 1);
 
     #if USE_TEXTURE
-      o = CCSampleWithAlphaSeparated(cc_spriteTexture, uv0);
+      o *= CCSampleWithAlphaSeparated(cc_spriteTexture, uv0);
+      #if IS_GRAY
+        float gray  = 0.2126 * o.r + 0.7152 * o.g + 0.0722 * o.b;
+        o.r = o.g = o.b = gray;
+      #endif
     #endif
-	
-	o.rgb = o.rgb / (o.a + 0.0019);
-	o.rgb = clamp(vec3(outputMatrix * vec4(o.rgb, 1.0)), 0.0, 1.0);
-	o.rgb = o.rgb / (o.a + 0.0019);
-    
-    return o;
-  }
-}%
 
-CCProgram adjust-vs %{
-  precision highp float;
-  #include <cc-global>
-  #if USE_LOCAL
-    #include <cc-local>
-  #endif
-  #if SAMPLE_FROM_RT
-    #include <common>
-  #endif
-  in vec3 a_position;
-  in vec2 a_texCoord;
-  in vec4 a_color;
-
-  vec4 vert () {
-    vec4 pos = vec4(a_position, 1);
-	pos = cc_matViewProj * pos;
-    return pos;
-  }
-}%
-
-CCProgram adjust-fs %{
-  precision highp float;
-  #include <embedded-alpha>
-  #include <alpha-test>
-
-  vec4 frag () {
-	vec4 incolor = vec4(0.399902, 0.399902, 0.399902, 0.0486755);
-    vec4 o = incolor;
-	o.a = 1.0;
-	o *= incolor.a;
-    
+    o *= color;
+    ALPHA_TEST(o);
     return o;
   }
 }%

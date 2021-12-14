@@ -12,9 +12,19 @@
     {
       "SAMPLE_FROM_RT": true,
       "USE_TEXTURE": true
-    }
+    },
+    {}
   ],
   "_states": [
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
     {
       "rasterizerState": {},
       "depthStencilState": {},
@@ -26,6 +36,7 @@
     }
   ],
   "_props": [
+    {},
     {}
   ]
 }

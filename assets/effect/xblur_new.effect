@@ -165,13 +165,7 @@ CCProgram unlit-fs %{
 	blurWeightsAndOffset[29] = 28.4243; 
     
     float blurStep = 0.00333;
-
-	#if __VERSION__ <= 100
-	# define blurSize 15
-	#else
-	//# define blurSize int(cc_ambientSky.w) 
-	# define blurSize 15 
-	#endif
+	#define blurSize 15
 
     float offset;
     vec2 lTexCoords, rTexCoords;
@@ -180,9 +174,12 @@ CCProgram unlit-fs %{
         offset = blurStep * blurWeightsAndOffset[blurSize + i];
         lTexCoords = v_uv - vec2(offset, 0);
         rTexCoords = v_uv + vec2(offset, 0);
+
         color.rgb += ((texture(mainTexture, lTexCoords).rgb + texture(mainTexture, rTexCoords).rgb) * blurWeightsAndOffset[i]);
     }
-	color.a = 1.0;	
-	return color;
+	
+	color = color/color.w;
+	
+	return CCFragOutput(color);
   }
 }%
