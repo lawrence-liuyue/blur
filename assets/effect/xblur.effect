@@ -129,42 +129,8 @@ CCProgram unlit-fs %{
   #endif
 
   vec4 frag () {
-    vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
-	
-	float blurWeightsAndOffset[30];
-	blurWeightsAndOffset[0] = 0.0618246;
-	blurWeightsAndOffset[1] = 0.0799065;
-	blurWeightsAndOffset[2] = 0.0741542;
-	blurWeightsAndOffset[3] = 0.06594;
-	blurWeightsAndOffset[4] = 0.0561851;
-	blurWeightsAndOffset[5] = 0.0458725;
-	blurWeightsAndOffset[6] = 0.0358874;
-	blurWeightsAndOffset[7] = 0.0269024;
-	blurWeightsAndOffset[8] = 0.0193241;
-	blurWeightsAndOffset[9] = 0.0133005;
-	blurWeightsAndOffset[10] = 0.00877189;
-	blurWeightsAndOffset[11] = 0.00554342; 
-	blurWeightsAndOffset[12] = 0.00335676;
-	blurWeightsAndOffset[13] = 0.0019477;
-	blurWeightsAndOffset[14] = 0.00108288;
-
-	blurWeightsAndOffset[15] = 0.665477;
-	blurWeightsAndOffset[16] = 2.49331;
-	blurWeightsAndOffset[17] = 4.48796;
-	blurWeightsAndOffset[18] = 6.48262;
-	blurWeightsAndOffset[19] = 8.47727;
-	blurWeightsAndOffset[20] = 10.4719;
-	blurWeightsAndOffset[21] = 12.4666;
-	blurWeightsAndOffset[22] = 14.4613;
-	blurWeightsAndOffset[23] = 16.567;
-	blurWeightsAndOffset[24] = 18.4507;
-	blurWeightsAndOffset[25] = 20.4454;
-	blurWeightsAndOffset[26] = 22.4401;
-	blurWeightsAndOffset[27] = 24.4348;
-	blurWeightsAndOffset[28] = 26.4296;
-	blurWeightsAndOffset[29] = 28.4243; 
-    
-    float blurStep = 0.00333;
+    vec4 color = vec4(0.0, 0.0, 0.0, 1.0);    
+    float blurStep = 0.0037037;
 
 	#if __VERSION__ <= 100
 	# define blurSize 15
@@ -173,14 +139,15 @@ CCProgram unlit-fs %{
 	# define blurSize 15 
 	#endif
 
-    float offset;
+    float offset, roffset;
     vec2 lTexCoords, rTexCoords;
-
     for (int i = 0; i < blurSize; ++i) {
-        offset = blurStep * blurWeightsAndOffset[blurSize + i];
-        lTexCoords = v_uv - vec2(offset, 0);
-        rTexCoords = v_uv + vec2(offset, 0);
-        color.rgb += ((texture(mainTexture, lTexCoords).rgb + texture(mainTexture, rTexCoords).rgb) * blurWeightsAndOffset[i]);
+        offset = blurStep * cc_blurOffsetWeight[i].x;
+		roffset = -blurStep * cc_blurOffsetWeight[i].x;
+        lTexCoords = v_uv + vec2(offset, 0);
+        rTexCoords = v_uv + vec2(roffset, 0);
+        color.rgb += (texture(mainTexture, lTexCoords).rgb * cc_blurOffsetWeight[i].y +
+					  texture(mainTexture, rTexCoords).rgb * cc_blurOffsetWeight[i].y);
     }
 	color.a = 1.0;	
 	return color;

@@ -1,3 +1,10 @@
 {
-  "__version__": "1.0.5"
+  "__version__": "1.0.5",
+  "modules": {
+    "flags": {
+      "2d": {
+        "UI_GPU_DRIVEN": true
+      }
+    }
+  }
 }

@@ -148,7 +148,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 540,
-      "y": 1169.9999999999998,
+      "y": 1170,
       "z": 0
     },
     "_lrot": {
@@ -413,10 +413,10 @@
     "__prefab": null,
     "_alignFlags": 45,
     "_target": null,
-    "_left": 480,
-    "_right": 480,
-    "_top": -3.979039320256561e-13,
-    "_bottom": -3.979039320256561e-13,
+    "_left": -480,
+    "_right": -480,
+    "_top": -1.7053025658242404e-13,
+    "_bottom": -1.7053025658242404e-13,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -1244,9 +1244,6 @@
     },
     "fog": {
       "__id__": 42
-    },
-    "octree": {
-      "__id__": 43
     }
   },
   {
@@ -1363,22 +1360,5 @@
     "_fogTop": 1.5,
     "_fogRange": 1.2,
     "_accurate": false
-  },
-  {
-    "__type__": "cc.OctreeInfo",
-    "_enabled": false,
-    "_minPos": {
-      "__type__": "cc.Vec3",
-      "x": -1024,
-      "y": -1024,
-      "z": -1024
-    },
-    "_maxPos": {
-      "__type__": "cc.Vec3",
-      "x": 1024,
-      "y": 1024,
-      "z": 1024
-    },
-    "_depth": 8
   }
 ]
